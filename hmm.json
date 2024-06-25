@@ -63,6 +63,12 @@
       "url": "https://github.com/MAJigsaw77/hxdiscord_rpc"
     },
     {
+      "name": "fnf-modcharting-tools",
+      "type": "git",
+      "dir": null,
+      "ref": "main",
+      "url": "https://github.com/EdwhakKB/FNF-Modcharting-Tools"
+    {
       "name": "flxanimate",
       "type": "git",
       "dir": null,
