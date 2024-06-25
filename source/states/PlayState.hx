@@ -32,6 +32,10 @@ import states.editors.CharacterEditorState;
 import substates.PauseSubState;
 import substates.GameOverSubstate;
 
+import modcharting.ModchartFuncs;
+import modcharting.NoteMovement;
+import modcharting.PlayfieldRenderer;
+
 #if !flash
 import flixel.addons.display.FlxRuntimeShader;
 import openfl.filters.ShaderFilter;
@@ -264,6 +268,8 @@ class PlayState extends MusicBeatState
 	public var startCallback:Void->Void = null;
 	public var endCallback:Void->Void = null;
 
+	var backupGpu:Bool;
+	
 	override public function create()
 	{
 		//trace('Playback Rate: ' + playbackRate);
@@ -499,6 +505,13 @@ class PlayState extends MusicBeatState
 			timeTxt.size = 24;
 			timeTxt.y += 3;
 		}
+		backupGpu = ClientPrefs.data.cacheOnGPU;
+	        ClientPrefs.data.cacheOnGPU = false;
+	//Add this before camfollow stuff and after strumLineNotes and notes have been made
+	        playfieldRenderer = new PlayfieldRenderer(strumLineNotes, notes, this);
+	        playfieldRenderer.cameras = [camHUD];
+	        add(playfieldRenderer);
+	        add(grpNoteSplashes);
 
 		var splash:NoteSplash = new NoteSplash(100, 100);
 		grpNoteSplashes.add(splash);
@@ -506,7 +519,6 @@ class PlayState extends MusicBeatState
 
 		opponentStrums = new FlxTypedGroup<StrumNote>();
 		playerStrums = new FlxTypedGroup<StrumNote>();
-
 		generateSong(SONG.song);
 
 		noteGroup.add(grpNoteSplashes);
@@ -953,6 +965,9 @@ class PlayState extends MusicBeatState
 
 			generateStaticArrows(0);
 			generateStaticArrows(1);
+
+			NoteMovement.getDefaultStrumPos(this)
+				
 			for (i in 0...playerStrums.length) {
 				setOnScripts('defaultPlayerStrumX' + i, playerStrums.members[i].x);
 				setOnScripts('defaultPlayerStrumY' + i, playerStrums.members[i].y);
@@ -3015,6 +3030,8 @@ class PlayState extends MusicBeatState
 	}
 
 	override function destroy() {
+		ClientPrefs.data.cacheOnGPU = backupGpu;
+		
 		#if LUA_ALLOWED
 		for (lua in luaArray)
 		{
