@@ -83,6 +83,27 @@ class HScript extends SScript
 	override function preset() {
 		super.preset();
 
+		set('Math', Math);
+	set('ModchartEditorState', modcharting.ModchartEditorState);
+	set('ModchartEvent', modcharting.ModchartEvent);
+	set('ModchartEventManager', modcharting.ModchartEventManager);
+	set('ModchartFile', modcharting.ModchartFile);
+	set('ModchartFuncs', modcharting.ModchartFuncs);
+	set('ModchartMusicBeatState', modcharting.ModchartMusicBeatState);
+	set('ModchartUtil', modcharting.ModchartUtil);
+	for (i in ['mod', 'Modifier'])
+		set(i, modcharting.Modifier); //the game crashes without this???????? what??????????? -- fue glow
+	set('ModifierSubValue', modcharting.Modifier.ModifierSubValue);
+	set('ModTable', modcharting.ModTable);
+	set('NoteMovement', modcharting.NoteMovement);
+	set('NotePositionData', modcharting.NotePositionData);
+	set('Playfield', modcharting.Playfield);
+	set('PlayfieldRenderer', modcharting.PlayfieldRenderer);
+	set('SimpleQuaternion', modcharting.SimpleQuaternion);
+	set('SustainStrip', modcharting.SustainStrip);
+	
+	modcharting.ModchartFuncs.loadHScriptFunctions(this);
+
 		// Some very commonly used classes
 		set('FlxG', flixel.FlxG);
 		set('FlxMath', flixel.math.FlxMath);
