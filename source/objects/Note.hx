@@ -38,6 +38,9 @@ typedef NoteSplashData = {
 **/
 class Note extends flixel.addons.effects.FlxSkewedSprite
 {
+	public var mesh:modcharting.SustainStrip = null;
+        public var z:Float = 0;
+	
 	public var extraData:Map<String, Dynamic> = new Map<String, Dynamic>();
 
 	public var strumTime:Float = 0;
