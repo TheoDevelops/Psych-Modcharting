@@ -966,7 +966,7 @@ class PlayState extends MusicBeatState
 			generateStaticArrows(0);
 			generateStaticArrows(1);
 
-			NoteMovement.getDefaultStrumPos(this)
+			NoteMovement.getDefaultStrumPos(this);
 				
 			for (i in 0...playerStrums.length) {
 				setOnScripts('defaultPlayerStrumX' + i, playerStrums.members[i].x);
