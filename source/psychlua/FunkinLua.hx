@@ -81,7 +81,7 @@ class FunkinLua {
 			this.modFolder = myFolder[1];
 		#end
 
-		ModchartFuncs.loadLuaFunctions(this)
+		ModchartFuncs.loadLuaFunctions(this);
 
 		// Lua shit
 		set('Function_StopLua', LuaUtils.Function_StopLua);
