@@ -9,6 +9,8 @@ import psychlua.CustomSubstate;
 import psychlua.FunkinLua;
 #end
 
+typedef TeaCall = tea.SScript.Tea;
+
 #if HSCRIPT_ALLOWED
 import tea.SScript;
 class HScript extends SScript
