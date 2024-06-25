@@ -36,7 +36,7 @@ typedef NoteSplashData = {
  * 
  * If you want to make a custom note type, you should search for: "function set_noteType"
 **/
-class Note extends FlxSprite
+class Note extends flixel.addons.effects.FlxSkewedSprite
 {
 	public var extraData:Map<String, Dynamic> = new Map<String, Dynamic>();
 
