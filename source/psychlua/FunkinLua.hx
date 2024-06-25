@@ -1,6 +1,8 @@
 #if LUA_ALLOWED
 package psychlua;
 
+import modcharting.ModchartFuncs; 
+
 import backend.WeekData;
 import backend.Highscore;
 import backend.Song;
@@ -44,6 +46,7 @@ import flixel.input.gamepad.FlxGamepadInputID;
 import haxe.Json;
 
 class FunkinLua {
+	public static var instance:FunkinLua = null;
 	public var lua:State = null;
 	public var camTarget:FlxCamera;
 	public var scriptName:String = '';
@@ -58,6 +61,8 @@ class FunkinLua {
 	public static var customFunctions:Map<String, Dynamic> = new Map<String, Dynamic>();
 
 	public function new(scriptName:String) {
+		#if desktop DiscordClient.addLuaCallbacks(this); #end
+			
 		lua = LuaL.newstate();
 		LuaL.openlibs(lua);
 
@@ -75,6 +80,8 @@ class FunkinLua {
 		if(myFolder[0] + '/' == Paths.mods() && (Mods.currentModDirectory == myFolder[1] || Mods.getGlobalMods().contains(myFolder[1]))) //is inside mods folder
 			this.modFolder = myFolder[1];
 		#end
+
+		ModchartFuncs.loadLuaFunctions(this)
 
 		// Lua shit
 		set('Function_StopLua', LuaUtils.Function_StopLua);
